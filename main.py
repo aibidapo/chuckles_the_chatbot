@@ -1,13 +1,21 @@
 import openai
 from dotenv import dotenv_values
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, Request
 from typing import Annotated
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+
 
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
 
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def chat_page(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
 
 chat_log = [{
     'role': 'system',
