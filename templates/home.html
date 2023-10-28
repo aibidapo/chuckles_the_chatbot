@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
     <h3>
-        Add input to chat with personal ChucklesChatbot
+        Add input to chat with ChucklesChatbot
     </h3>
     <form action="/" method="POST">
         <div>
@@ -16,6 +16,9 @@
             Chat History:
             </div>
             <div class="card-body">
+                {% for response in chat_responses %}
                 </div>
+                - {{ response }}
             </div>
+            {% endfor %}
         </div>
